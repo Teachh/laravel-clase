@@ -23,6 +23,7 @@ Route::get('/catalog','CatalogController@getIndex')->middleware('auth');
 Route::get('/catalog/show/{id}','CatalogController@getShow')->middleware('auth');
 Route::get('/catalog/create','CatalogController@getCreate')->middleware('auth');
 Route::get('/catalog/edit/{id}','CatalogController@getEdit')->middleware('auth');
+Route::put('/catalog/edit/{id}','CatalogController@putEdit')->middleware('auth');
 Route::post('/catalog/create','CatalogController@postCreate')->middleware('auth');
 Route::put('/catalog/rent/{id}','CatalogController@putRent')->middleware('auth');
 Route::put('/catalog/return/{id}','CatalogController@putReturn')->middleware('auth');
