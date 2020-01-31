@@ -53,7 +53,7 @@ class CatalogController extends Controller
     $movie->director = request('director');
     $movie->poster = request('poster');
     $movie->synopsis = request('synopsis');
-    //guardarlo en la base 
+    //guardarlo en la base
     $movie->save();
     Notify::success('Se ha creado correctamente')->delay(2000);
     return redirect('/catalog');

@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::put('v1/catalog/{id}/rent', 'APICatalogController@putRent')->middleware('auth.basic.once');
+Route::put('v1/catalog/{id}/return', 'APICatalogController@putReturn')->middleware('auth.basic.once');
+Route::resource('v1/catalog', 'APICatalogController',['only' => ['index', 'show']]);
+Route::resource('v1/catalog', 'APICatalogController',['except' => ['index', 'show']])->middleware('auth.basic.once');
