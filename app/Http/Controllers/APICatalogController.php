@@ -85,7 +85,7 @@ class APICatalogController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $movie = Movie::find($id);
+    $movie = Movie::findOrFail($id);
     $movie->update($request->all());
 
     return response()->json($movie, 200);
@@ -99,7 +99,7 @@ class APICatalogController extends Controller
    */
   public function destroy($id)
   {
-    $movie = Movie::find($id);
+    $movie = Movie::findOrFail($id);
     $movie->delete();
     return response()->json($movie, 200);
 
