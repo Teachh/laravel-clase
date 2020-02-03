@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Movie;
-
 class APICatalogController extends Controller
 {
 
@@ -12,6 +11,9 @@ class APICatalogController extends Controller
   //poner en alquilado
  public function putRent($id) {
     $m = Movie::findOrFail( $id );
+    if($m->rented == true){
+      return 'Esta pelicula ya está alquilada';
+    }
     $m->rented = true;
     $m->save();
     return response()->json( ['error' => false, 'msg' => 'La película se ha marcado como alquilada' ] );
@@ -19,6 +21,9 @@ class APICatalogController extends Controller
   //quitar de alquilado
   public function putReturn($id) {
     $m = Movie::findOrFail( $id );
+    if($m->rented == false){
+      return 'Esta pelicula ya está sin alquilar';
+    }
     $m->rented = false;
     $m->save();
     return response()->json( ['error' => false, 'msg' => 'La película se ha marcado como no alquilada' ] );
@@ -50,8 +55,16 @@ class APICatalogController extends Controller
    */
   public function store(Request $request)
   {
-    $movie = Movie::create($request->all());
-    return response()->json($movie, 201);
+
+    if(!$request->has('title') || !$request->has('year') || !$request->has('director') || !$request->has('poster') || !$request->has('rented') || !$request->has('synopsis')){
+      echo 'No se puede crear porque falta/n campos';
+    }
+    else{
+      $movie = Movie::create($request->all());
+      return response()->json($movie, 201);
+    }
+
+
   }
 
   /**
@@ -63,7 +76,14 @@ class APICatalogController extends Controller
    // cambiar email para el futuro
   public function show($id)
   {
-    return response()->json(Movie::where('id', $id)->get());
+    // te lo pongo asi porque con el find or fail me salta error normal
+    $movie = Movie::where('id', $id)->get();
+    if(sizeof($movie)){
+      return response()->json($movie);
+    }
+    else{
+      return 'El código no es correcto';
+    }
   }
 
   /**
@@ -85,10 +105,16 @@ class APICatalogController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $movie = Movie::findOrFail($id);
-    $movie->update($request->all());
-
-    return response()->json($movie, 200);
+    //$movie = Movie::findOrFail($id);
+    // te lo pongo asi porque con el find or fail me salta error normal
+    $movie = Movie::where('id', $id)->get();
+    if(sizeof($movie)){
+      $movie->update($request->all());
+      return response()->json($movie, 200);
+    }
+    else{
+      return 'El código no es correcto';
+    }
   }
 
   /**
@@ -99,9 +125,15 @@ class APICatalogController extends Controller
    */
   public function destroy($id)
   {
-    $movie = Movie::findOrFail($id);
-    $movie->delete();
-    return response()->json($movie, 200);
+    // te lo pongo asi porque con el find or fail me salta error normal
+    $movie = Movie::where('id', $id)->get();
+    if(sizeof($movie)){
+      Movie::where('id', $id)->delete();
+      return response()->json('Borrada correctamente', 200);
+    }
+    else{
+      return 'El código no es correcto';
+    }
 
   }
   // ============= END API =============
