@@ -43,7 +43,7 @@ class CatalogController extends Controller
     $pelicula = Movie::findOrFail($id);
     $pelicula->delete();
     Notify::success('Has borrado la película con exito')->delay(2000);
-    return redirect('/catalog/show/'.$id);
+    return redirect('/catalog');
   }
   //ACTUAL
   public function postCreate(Request $request){
@@ -56,6 +56,7 @@ class CatalogController extends Controller
     $movie->poster = request('poster');
     $movie->synopsis = request('synopsis');
     $movie->category_id = request('category');
+    $movie->trailer = request('trailer');
     //guardarlo en la base
     $movie->save();
     Notify::success('Se ha creado correctamente')->delay(2000);
@@ -71,6 +72,7 @@ class CatalogController extends Controller
     $movie->poster = request('poster');
     $movie->synopsis = request('synopsis');
     $movie->category_id = request('category');
+    $movie->trailer = request('trailer');
     $movie->save();
 
     //Movie::findOrFail($id)->update($request->all());

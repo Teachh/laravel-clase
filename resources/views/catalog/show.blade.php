@@ -30,6 +30,10 @@
         <h4>Director: {{$pelicula->director}}</h4>
         <h4>Categoría: {{$pelicula->category->title}}</h4>
         <p><span style="font-weight:bold">Resumen: </span>{{$pelicula->synopsis}}</p>
+        <h4>Trailer</h4>
+        <iframe width="100%" height="400rem"
+        src="{{$pelicula->trailer}}">
+        </iframe>
         <br>
         @if (!$pelicula->rented)
         <p><span style="font-weight:bold">Estado:</span>La película se puede alquilar</p>

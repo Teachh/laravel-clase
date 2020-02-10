@@ -219,6 +219,7 @@ class DatabaseSeeder extends Seeder
         $p->rented = $pelicula['rented'];
         $p->synopsis = $pelicula['synopsis'];
         $p->category_id = rand(1,4);
+        $p->trailer = 'https://www.youtube.com/embed/tgbNymZ7vqY';
         $p->save();
       }
     }

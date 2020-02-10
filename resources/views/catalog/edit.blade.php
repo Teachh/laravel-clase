@@ -38,6 +38,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="title">Trailer</label>
+                        <input type="text" name="trailer" id="trailer" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
                         <label for="synopsis">Resumen</label>
                         <textarea name="synopsis" id="synopsis" class="form-control" required rows="3">{{ $pelicula->synopsis }}</textarea>
                     </div>
