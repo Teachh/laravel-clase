@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-  <h2>RÁNKING</h2>
+  <h2>Ránking</h2>
   <div class="row">
     @php
        $cnt = 1;

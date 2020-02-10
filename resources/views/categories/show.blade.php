@@ -1,15 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
-  <div class="mt-3">
-      <h2>{{$categoria->title}}</h2>
-      <p><span style="font-weight:bold">Descripción: </span>{{$categoria->description}}</p>
-      @if (!$categoria->adult)
-      <p><span style="font-weight:bold">Estado:</span>No es una categoría de adultos</p>
-      @else
-      <p><span style="font-weight:bold">Estado:</span>Es una categoría de adultos</p>
-      @endif
-      <a href="{{url('/category')}}"><button type="button" class="btn btn-primary ml-1 w-100">Atrás</button></a>
-
-  </div>
+  <h1>Categoría {{$movies[0]->category->title}}</h1>
+<div class="row">
+  @foreach( $movies as $key => $pelicula )
+    <div class="col-xs-6 col-sm-4 col-md-3 text-center mt-3">
+        <a href="{{ url('/catalog/show/' . $pelicula->id ) }}">
+            <img src="{{$pelicula->poster}}" style="height:200px"/>
+            <h4 style="min-height:45px;margin:5px 0 10px 0">
+                {{$pelicula->title}}
+            </h4>
+        </a>
+    </div>
+  @endforeach
+</div>
 @stop

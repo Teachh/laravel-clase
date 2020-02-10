@@ -16,7 +16,6 @@
   </div>
   <div class="row">
   <?php
-  $user = App\User::findOrFail(1);
   // para añadir a la tabla pivot
   //$user->movies()->attach(App\Movie::findOrFail(1));
   // para quitar de la tabla pivot

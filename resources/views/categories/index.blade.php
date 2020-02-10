@@ -21,7 +21,7 @@
         <td>{{$cat->description}}</td>
         <td>{{($cat->adult)?'SI':'NO'}}</td>
         <td>
-          <a href="{{url('/category/'.$cat->id)}}"><button type="button" class="btn btn-info ml-1">Mostrar</button></a>
+          <a href="{{url('/category/'.$cat->id)}}"><button type="button" class="btn btn-info ml-1">Mostrar películas</button></a>
           <a href="{{url('/category/'.$cat->id.'/edit')}}"><button type="button" class="btn btn-warning ml-1">Editar</button></a>
           <form action="{{action('CategoryController@destroy', $cat->id)}}" method="post" style="display: inline">
             @csrf

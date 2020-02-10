@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\Movie;
 use Notify;
 
 class CategoryController extends Controller
@@ -52,7 +53,8 @@ class CategoryController extends Controller
     public function show($id)
     {
       $categoria = Category::findOrFail($id);
-      return view('categories.show', compact('categoria'));
+      $movies = Movie::where('category_id',$id)->get();
+      return view('categories.show', compact('movies'));
     }
 
     /**

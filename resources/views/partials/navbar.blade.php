@@ -11,20 +11,22 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
                         <a class="nav-link" href="{{url('/catalog')}}">
-                            <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                            <i class="fas fa-book-open"></i>
                             Catálogo
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
+                    <li class="nav-item {{ Request::is('category') && ! Request::is('catalog/create')? 'active' : ''}}">
                         <a class="nav-link" href="{{url('/category')}}">
-                            <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                            <i class="fas fa-certificate"></i>
                             Categorías
                         </a>
                     </li>
-                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
+                    <li class="nav-item {{ Request::is('ranking') && ! Request::is('catalog/create')? 'active' : ''}}">
                         <a class="nav-link" href="{{url('/ranking')}}">
-                            <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                          <i class="fas fa-medal"></i>
                             Ránking
+
+
                         </a>
                     </li>
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
