@@ -178,8 +178,36 @@ class DatabaseSeeder extends Seeder
         // self::seedCatalog();
         // $this->command->info('Tabla catálogo inicializada con datos!');
         self::seedUsers();
+        self::seedCategory();
+        self::seedCatalog();
         $this->command->info('Tabla usuarios inicializada con datos!');
     }
+
+    public function seedCategory(){
+      DB::table('categories')->delete();
+      DB::table('categories')->insert([
+        'title' => 'Infantil',
+        'description' => 'Infantil',
+        'adult' => 0,
+      ]);
+      DB::table('categories')->insert([
+        'title' => 'Comedia',
+        'description' => 'Comedia',
+        'adult' => 0,
+      ]);
+      DB::table('categories')->insert([
+        'title' => 'Miedo',
+        'description' => 'Miedo',
+        'adult' => 1,
+      ]);
+      DB::table('categories')->insert([
+        'title' => 'Psicológica',
+        'description' => 'Psicológica',
+        'adult' => 1,
+      ]);
+
+    }
+
     public function seedCatalog(){
      DB::table('movies')->delete();
      foreach( $this->arrayPeliculas as $pelicula ) {
@@ -190,6 +218,7 @@ class DatabaseSeeder extends Seeder
         $p->poster = $pelicula['poster'];
         $p->rented = $pelicula['rented'];
         $p->synopsis = $pelicula['synopsis'];
+        $p->category_id = rand(1,4);
         $p->save();
       }
     }

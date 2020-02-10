@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Movie;
+use App\Review;
 use Notify;
 
 class CatalogController extends Controller
@@ -13,7 +14,8 @@ class CatalogController extends Controller
   }
   public function getShow($id){
     $pelicula = Movie::findOrFail($id);
-    return view('catalog.show',compact('pelicula'));
+    $review = Review::where('movie_id',$id)->orderby('created_at','DESC')->paginate(3);
+    return view('catalog.show',compact('pelicula','review'));
   }
   public function getCreate(){
     return view('catalog.create');
@@ -28,20 +30,20 @@ class CatalogController extends Controller
     $pelicula->rented = true;
     $pelicula->save();
     Notify::success('Se ha alquilado correctamente')->delay(2000);
-    return view('catalog.show',compact('pelicula'));
+    return redirect('/catalog/show/'.$id);
   }
   public function putReturn($id){
     $pelicula = Movie::findOrFail($id);
     $pelicula->rented = false;
     $pelicula->save();
     Notify::success('Se ha devuelto correctamente')->delay(2000);
-    return view('catalog.show',compact('pelicula'));
+    return redirect('/catalog/show/'.$id);
   }
   public function deleteMovie($id){
     $pelicula = Movie::findOrFail($id);
     $pelicula->delete();
     Notify::success('Has borrado la película con exito')->delay(2000);
-    return view('catalog.index',array('arrayPeliculas'=>Movie::all()));
+    return redirect('/catalog/show/'.$id);
   }
   //ACTUAL
   public function postCreate(Request $request){
@@ -53,6 +55,7 @@ class CatalogController extends Controller
     $movie->director = request('director');
     $movie->poster = request('poster');
     $movie->synopsis = request('synopsis');
+    $movie->category_id = request('category');
     //guardarlo en la base
     $movie->save();
     Notify::success('Se ha creado correctamente')->delay(2000);
@@ -60,8 +63,66 @@ class CatalogController extends Controller
   }
   public function putEdit(Request $request, $id){
     //modificar
-    Movie::findOrFail($id)->update($request->all());
+    $movie = Movie::findOrFail($id);
+    //cargar parametros
+    $movie->title = request('title');
+    $movie->year = request('year');
+    $movie->director = request('director');
+    $movie->poster = request('poster');
+    $movie->synopsis = request('synopsis');
+    $movie->category_id = request('category');
+    $movie->save();
+
+    //Movie::findOrFail($id)->update($request->all());
     Notify::success('Se ha editado correctamente')->delay(2000);
     return redirect('/catalog/show/'.$id);
+  }
+
+  public function postComment(Request $request, $id){
+      $user = auth()->user();
+      $review = new Review();
+      $review->title = request('title');
+      $review->stars = request('stars');
+      $review->review = request('review');
+      $review->movie_id = $id;
+      $review->user_id = $user->id;
+      $review->save();
+      Notify::success('Se ha editado publicado correctamente')->delay(2000);
+      return redirect('/catalog/show/'.$id);
+  }
+
+  public function searcher(Request $request){
+    $q = $request->input('q');
+    $arrayPeliculas = Movie::where('title', 'LIKE', '%' . $q . '%')
+                              ->orWhere('director', 'LIKE', '%' . $q . '%')
+                              ->get();
+    return view('catalog.index', compact('arrayPeliculas'));
+  }
+  // FAVORITOS
+  public function favIndex(){
+    $favMovies = auth()->user()->movies;
+    return view('catalog.fav', compact('favMovies'));
+  }
+  // quitar de favoritos
+  public function favDel($id){
+    auth()->user()->movies()->detach(Movie::findOrFail($id));
+    return redirect('/catalog/show/'.$id);
+  }
+  // añadir a favoritos
+  public function favAdd($id){
+    auth()->user()->movies()->attach(Movie::findOrFail($id));
+    return redirect('/catalog/show/'.$id);
+  }
+
+  // ranking
+  public function ranking(){
+    $allMovies = Movie::all();
+    $ranking = [];
+    foreach ($allMovies as $mov => $value) {
+      $ranking[$value->id] = Review::where('movie_id',$value->id)->avg('stars');
+    }
+    // ordenar
+    arsort($ranking);
+    return view('catalog.ranking', compact('ranking'));
   }
 }

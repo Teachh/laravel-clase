@@ -1,0 +1,15 @@
+.comentarios {
+  margin-left: 3rem;
+  padding-left: 1rem;
+  border-left: 0.5rem solid lightgray;
+}
+ .fechas{
+  color: gray;
+}
+#comForm input, textarea, select{
+  padding: 0.3rem;
+}
+#cattable td{
+  padding: 1rem;
+  border-bottom: 1px solid lightgray;
+}

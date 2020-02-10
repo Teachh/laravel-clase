@@ -28,7 +28,14 @@ Route::post('/catalog/create','CatalogController@postCreate')->middleware('auth'
 Route::put('/catalog/rent/{id}','CatalogController@putRent')->middleware('auth');
 Route::put('/catalog/return/{id}','CatalogController@putReturn')->middleware('auth');
 Route::delete('/catalog/delete/{id}','CatalogController@deleteMovie')->middleware('auth');
-
-
+Route::post('/catalog/comment/{id}','CatalogController@postComment')->middleware('auth');
+Route::get('/catalog','CatalogController@searcher')->middleware('auth');
+Route::resource('category','CategoryController')->middleware('auth');
+// favoritos
+Route::get('/favoritos','CatalogController@favIndex')->middleware('auth');
+Route::put('/favoritos/del/{id}','CatalogController@favDel')->middleware('auth');
+Route::put('/favoritos/add/{id}','CatalogController@favAdd')->middleware('auth');
+// ranking
+Route::get('/ranking','CatalogController@ranking')->middleware('auth');
 
 Auth::routes();

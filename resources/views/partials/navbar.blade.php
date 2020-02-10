@@ -15,6 +15,18 @@
                             Catálogo
                         </a>
                     </li>
+                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
+                        <a class="nav-link" href="{{url('/category')}}">
+                            <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                            Categorías
+                        </a>
+                    </li>
+                    <li class="nav-item {{ Request::is('catalog') && ! Request::is('catalog/create')? 'active' : ''}}">
+                        <a class="nav-link" href="{{url('/ranking')}}">
+                            <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                            Ránking
+                        </a>
+                    </li>
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
                         <a class="nav-link" href="{{url('/catalog/create')}}">
                             <span>&#10010</span> Nueva película
@@ -23,6 +35,10 @@
                 </ul>
 
                 <ul class="navbar-nav navbar-right">
+
+                  <li class="nav-item mr-3 mt-2">
+                    <a href="{{ url('/favoritos') }}"><img style="width:2rem" src="https://cdn2.iconfinder.com/data/icons/basics-1/100/Like2-512.png" alt="ImagenCorazón"></a>
+                  </li>
                     <li class="nav-item">
                         <form action="{{ url('/logout') }}" method="POST" style="display:inline">
                             {{ csrf_field() }}
