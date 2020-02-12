@@ -180,7 +180,8 @@ class DatabaseSeeder extends Seeder
         self::seedUsers();
         self::seedCategory();
         self::seedCatalog();
-        $this->command->info('Tabla usuarios inicializada con datos!');
+        self::seedReview();
+        $this->command->info('Semillas inseridas correctamnete');
     }
 
     public function seedCategory(){
@@ -235,6 +236,51 @@ class DatabaseSeeder extends Seeder
         'name' => 'user2',
         'email' => 'user2@email.com',
         'password' => bcrypt('password'),
+      ]);
+    }
+    public function seedReview(){
+      DB::table('reviews')->delete();
+      DB::table('reviews')->insert([
+        'title' => 'Review1',
+        'review' => 'Review1',
+        'stars' => rand(1,5),
+        'user_id' => rand(1,2),
+        'movie_id' => rand(1,15),
+      ]);
+      DB::table('reviews')->insert([
+        'title' => 'Review2',
+        'review' => 'Review2',
+        'stars' => rand(1,5),
+        'user_id' => rand(1,2),
+        'movie_id' => rand(1,15),
+      ]);
+      DB::table('reviews')->insert([
+        'title' => 'Review3',
+        'review' => 'Review3',
+        'stars' => rand(1,5),
+        'user_id' => rand(1,2),
+        'movie_id' => rand(1,15),
+      ]);
+      DB::table('reviews')->insert([
+        'title' => 'Review4',
+        'review' => 'Review4',
+        'stars' => rand(1,5),
+        'user_id' => rand(1,2),
+        'movie_id' => rand(1,15),
+      ]);
+      DB::table('reviews')->insert([
+        'title' => 'Review5',
+        'review' => 'Review5',
+        'stars' => rand(1,5),
+        'user_id' => rand(1,2),
+        'movie_id' => rand(1,15),
+      ]);
+      DB::table('reviews')->insert([
+        'title' => 'Review6',
+        'review' => 'Review6',
+        'stars' => rand(1,5),
+        'user_id' => rand(1,2),
+        'movie_id' => rand(1,15),
       ]);
     }
 }
