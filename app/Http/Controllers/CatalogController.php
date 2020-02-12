@@ -98,7 +98,7 @@ class CatalogController extends Controller
     $arrayPeliculas = Movie::where('title', 'LIKE', '%' . $q . '%')
                               ->orWhere('director', 'LIKE', '%' . $q . '%')
                               ->get();
-    return view('catalog.index', compact('arrayPeliculas'));
+    return view('catalog.index', compact('arrayPeliculas', 'q'));
   }
   // FAVORITOS
   public function favIndex(){

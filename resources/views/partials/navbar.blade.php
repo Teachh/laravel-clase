@@ -25,8 +25,6 @@
                         <a class="nav-link" href="{{url('/ranking')}}">
                           <i class="fas fa-medal"></i>
                             Ránking
-
-
                         </a>
                     </li>
                     <li class="nav-item {{  Request::is('catalog/create') ? 'active' : ''}}">
@@ -34,12 +32,24 @@
                             <span>&#10010</span> Nueva película
                         </a>
                     </li>
+                    <li class="nav-item">
+                      <form action="{{ action('CatalogController@searcher')}}" method="GET">
+                        <div class="row">
+                          <div class="col-8">
+                            <input class="form-control" type="text" name="q" required/>
+                          </div>
+                          <div class="col-2">
+                            <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                          </div>
+                        </div>
+                      </form>
+                    </li>
                 </ul>
 
                 <ul class="navbar-nav navbar-right">
 
                   <li class="nav-item mr-3 mt-2">
-                    <a href="{{ url('/favoritos') }}"><img style="width:2rem" src="https://cdn2.iconfinder.com/data/icons/basics-1/100/Like2-512.png" alt="ImagenCorazón"></a>
+                    <a href="{{ url('/favoritos') }}"><i class="fas fa-hand-holding-heart" style="color:gray; font-size:2rem"></i></a>
                   </li>
                     <li class="nav-item">
                         <form action="{{ url('/logout') }}" method="POST" style="display:inline">

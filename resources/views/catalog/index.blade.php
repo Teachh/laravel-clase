@@ -1,19 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-  <div class="container">
-    <h3 class="mt-2">Buscador</h3>
-    <form action="{{ action('CatalogController@searcher')}}" method="GET" class="mb-4">
-      <div class="row">
-        <div class="col-12 col-md-10">
-          <input class="form-control" type="text" name="q" required/>
-        </div>
-        <div class="col-12 col-md-2">
-          <button type="submit" class="btn btn-primary mt-3 mt-sm-0">Buscar</button>
-        </div>
-      </div>
-    </form>
-  </div>
+  <h1 class="mb-2 mt-1">{{($q ?? '')?'Resultados: ':''}}{{$q ?? '' ?? ''}}</h1>
+
   <div class="row">
   <?php
   // para añadir a la tabla pivot
