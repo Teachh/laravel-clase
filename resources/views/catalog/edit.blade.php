@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         <label for="title">Trailer</label>
-                        <input type="text" name="trailer" id="trailer" class="form-control" required>
+                        <input type="text" name="trailer" id="trailer" value="{{ $pelicula->trailer }}" class="form-control" required>
                     </div>
 
                     <div class="form-group">
