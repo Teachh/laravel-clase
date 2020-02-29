@@ -55,12 +55,24 @@ class APICatalogController extends Controller
    */
   public function store(Request $request)
   {
-
     if(!$request->has('title') || !$request->has('year') || !$request->has('director') || !$request->has('poster') || !$request->has('rented') || !$request->has('synopsis')){
       echo 'No se puede crear porque falta/n campos';
     }
     else{
-      $movie = Movie::create($request->all());
+      $movie = new Movie();
+      //cargar parametros
+      $movie->title = request('title');
+      $movie->year = request('year');
+      $movie->director = request('director');
+      $movie->poster = request('poster');
+      $movie->synopsis = request('synopsis');
+      $movie->category_id = request('category');
+      $movie->trailer = request('trailer');
+      $movie->category_id = request('category_id');
+      $movie->trailer = request('trailer');
+      //guardarlo en la base
+      $movie->save();
+      // $movie = Movie::create($request->all());
       return response()->json($movie, 201);
     }
 
