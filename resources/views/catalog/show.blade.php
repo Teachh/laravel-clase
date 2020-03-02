@@ -10,7 +10,7 @@
         <form id="comForm" action="{{action('CatalogController@postComment', $pelicula->id)}}" method="post">
           @csrf
           <a>Enviar comentario:</a>
-          <input class="mb-3 mt-2 w-100" type="text" name="title" placeholder="Resumen del comentario">
+          <input class="mb-3 mt-2 w-100" type="text" name="title" placeholder="Resumen del comentario" required>
           <a>Valoración:</a>
           <select class="mb-3 mt-2 w-100" name="stars">
             <option value="1">1 estrella</option>
@@ -19,7 +19,7 @@
             <option value="4">4 estrella</option>
             <option value="5">5 estrella</option>
           </select>
-          <textarea class="w-100" name="review" rows="5" cols="80" placeholder="Dinos tu opinión"></textarea>
+          <textarea class="w-100" name="review" rows="5" cols="80" placeholder="Dinos tu opinión" required></textarea>
           <button type="submit" class="btn btn-primary ml-1">Valorar</button>
         </form>
 
