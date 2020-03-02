@@ -15,9 +15,9 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
-            $table->text('review');
-            $table->integer('stars');
+            $table->string('title')->nullable();
+            $table->text('review')->nullable();
+            $table->integer('stars')->nullable();
             // si se borra un usuario/pelicula también se borran sus comentarios
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
