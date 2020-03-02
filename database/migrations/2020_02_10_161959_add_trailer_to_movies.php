@@ -14,7 +14,7 @@ class AddTrailerToMovies extends Migration
     public function up()
     {
         Schema::table('movies', function (Blueprint $table) {
-          $table->text('trailer');
+          $table->text('trailer')->nullable();
         });
     }
 

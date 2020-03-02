@@ -84,11 +84,9 @@ class ExampleTest extends TestCase
       // descomentar para activar
 
       $this->assertDatabaseHas('reviews',[
-        'title' => '',
-        'review' => '',
-        'stars' => '',
-        'user_id' => '',
-        'movie_id' => '',
+        'title' => null,
+        'review' => null,
+        'stars' => null,
       ]);
     }
 
@@ -139,8 +137,8 @@ class ExampleTest extends TestCase
       // $movie = factory(Movie::class)->create();
 
       // hacer la modificacion
-      $response = $this->put('/catalog/edit/1',[
-        'id' => '1',
+      $response = $this->put('/catalog/edit/2',[
+        'id' => '2',
         'title' => 'Cambiado',
         'year' => '1972',
         'director' => 'Cambiado',
@@ -165,14 +163,15 @@ class ExampleTest extends TestCase
       //
 
       // mirar si hay algo en la base de datos como esto
-      // $this->assertDatabaseHas('movies',[
-      //   'title' => 'El padrinoo'
-      // ]);
+      $this->assertDatabaseHas('movies',[
+        'title' => 'Cambiado'
+      ]);
     }
 
     /** @test */
     // Crear pelicula vacia
     public function crear_pelicula_vacia(){
+
       // simular que estas logeado
       $user = factory(User::class)->create([
           'password' => bcrypt($password = 'i-love-laravel'),
@@ -188,23 +187,16 @@ class ExampleTest extends TestCase
         'year' => '',
         'director' => '',
         'poster' => '',
-        'rented' => '',
         'synopsis' => '',
-        'category_id' => '',
+        'category' => '',
         'trailer' => '',
       ]);
+
       // mirar si hay algo en la base de datos como esto
       // ( si salta error es que no se peude insertar)
 
       $this->assertDatabaseHas('movies',[
-        'title' => '',
-        'year' => '',
-        'director' => '',
-        'poster' => '',
-        'rented' => '',
-        'synopsis' => '',
-        'category_id' => '',
-        'trailer' => '',
+        'title' => null
       ]);
     }
 

@@ -19,9 +19,9 @@ class CreateReviewsTable extends Migration
             $table->text('review')->nullable();
             $table->integer('stars')->nullable();
             // si se borra un usuario/pelicula también se borran sus comentarios
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->default('1');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->bigInteger('movie_id')->unsigned();
+            $table->bigInteger('movie_id')->unsigned()->default('1');
             $table->foreign('movie_id')->references('id')->on('movies')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
