@@ -121,7 +121,7 @@ class ExampleTest extends TestCase
 
 
     /** @test */
-    // NO ESTA HECHO
+    // hacer un put
     public function cambiar_una_pelicula(){
       // simular que estas logeado
       // $user = factory(User::class)->create([
@@ -140,11 +140,22 @@ class ExampleTest extends TestCase
 
       // hacer la modificacion
       $response = $this->put('/catalog/edit/1',[
-        'title' => 'Cambiado'
+        'id' => '1',
+        'title' => 'Cambiado',
+        'year' => '1972',
+        'director' => 'Cambiado',
+        'poster' => 'https://ia.media-imdb.com/images/M/MV5BMjEyMjcyNDI',
+        'synopsis' => "Don Vito Corleone (Marlon Brando) es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York. Tiene cuatro hijos: Connie (Talia Shire), el impulsivo Sonny (James Caan), el pusilánime Freddie (John Cazale) y Michael (Al Pacino), que no quiere saber nada de los negocios de su padre. Cuando Corleone, en contra de los consejos de 'Il consigliere' Tom Hagen (Robert Duvall), se niega a intervenir en el negocio de las drogas, el jefe de otra banda ordena su asesinato. Empieza entonces una violenta y cruenta guerra entre las familias mafiosas.",
+        'category_id' => '3',
+        'trailer' => 'https://www.youtube.com/embed/tgbNymZ7vqY',
       ]);
       // $response = $this->json('PUT','/catalog/edit/1', [
-      //           'title' => 'El padrinoo'
+      //           'title' => 'Cambiado'
       //       ]);
+      //$this->withExceptionHandling();
+      // $this->assertDatabaseHas('movies',[
+      //   'title' => 'Cambiado'
+      // ]);
       $response->assertStatus(302);
       //$response->assertJson('as');
 
@@ -158,7 +169,6 @@ class ExampleTest extends TestCase
       //   'title' => 'El padrinoo'
       // ]);
     }
-
 
     /** @test */
     // Crear pelicula vacia
