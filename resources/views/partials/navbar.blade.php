@@ -36,10 +36,10 @@
                       <form action="{{ action('CatalogController@searcher')}}" method="GET">
                         <div class="row">
                           <div class="col-8">
-                            <input class="form-control" type="text" name="q" required/>
+                            <input class="form-control" type="text" name="q" id="q" required/>
                           </div>
                           <div class="col-2">
-                            <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
+                            <button type="submit" id="busc" class="btn btn-dark"><i class="fas fa-search"></i></button>
                           </div>
                         </div>
                       </form>
@@ -54,7 +54,7 @@
                     <li class="nav-item">
                         <form action="{{ url('/logout') }}" method="POST" style="display:inline">
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-link nav-link" style="display:inline;cursor:pointer">
+                            <button type="submit" id="salir" class="btn btn-link nav-link" style="display:inline;cursor:pointer">
                                 Cerrar sesión
                             </button>
                         </form>
