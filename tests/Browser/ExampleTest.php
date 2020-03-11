@@ -5,6 +5,9 @@ namespace Tests\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+
+
 
 class ExampleTest extends DuskTestCase
 {
@@ -13,11 +16,12 @@ class ExampleTest extends DuskTestCase
      *
      * @return void
      */
+   use withFaker;
+
     public function testBasicExample()
     {
         $this->browse(function (Browser $browser) {
             // Visita la pàgina
-
             // pongo la URL entera por el tema de que no me deja usar el puerto
             $browser->visit('http://localhost:8000')
                     ->waitForText('Videoclub')
@@ -51,12 +55,12 @@ class ExampleTest extends DuskTestCase
             // Afegeix una nova pel·lícula (pots inventar algunes dades amb Faker)
                     ->clickLink('Nueva película')
                     ->assertPathIs('/catalog/create')
-                    ->type('title', 'Des del Dusk')
+                    ->type('title', $this->faker->name)
                     ->type('year', '2020')
-                    ->type('director', 'Héctor Naranjo')
+                    ->type('director', $this->faker->name)
                     ->type('poster', 'https://images-na.ssl-images-amazon.com/images/I/512sWuPuH-L.jpg')
                     ->type('trailer', 'No')
-                    ->type('synopsis', 'Des de Dusk es la descripcion')
+                    ->type('synopsis', $this->faker->text)
                     ->select('category', '1')
                     ->press('Añadir película')
             // Sortir de la sessió
